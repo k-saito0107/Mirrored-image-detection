@@ -30,7 +30,6 @@ def train(model, num_epochs,train_loader, test_loader):
             
             model.to(device)
             model = nn.DataParallel(model)
-            cudnn.benchmark = True
             
 
         for i, data in enumerate(train_loader, 0):
