@@ -68,7 +68,6 @@ class ResNet(nn.Module):
         self.layer8 = nn.Sequential(
             nn.Linear(f_out*32, f_out*8),
             nn.ReLU(inplace=True),
-            nn.Dropout(p=0.5),
             nn.Linear(f_out*8, n_ch),
             nn.ReLU(inplace=True)
         )
