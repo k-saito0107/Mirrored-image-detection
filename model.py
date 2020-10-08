@@ -74,7 +74,7 @@ class ResNet(nn.Module):
         x = self.layer4(x)
         x = self.layer5(x)
         x = self.layer6(x)
-        x=x.view(-1, 1024)
+        x=x.view(-1, 512)
         x = self.layer7(x)
 
         return x
