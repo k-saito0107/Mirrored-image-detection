@@ -41,7 +41,7 @@ train_images=ImageFolder(
 )
 
 test_images=ImageFolder(
-    '/kw_resources/Mirrored-image-detection/data/val/',
+    '/kw_resources/Mirrored-image-detection/data/test/',
     transform=val_transform
 )
 
