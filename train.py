@@ -28,8 +28,9 @@ def train(model, num_epochs,train_loader, test_loader):
                 loss = checkpoint['loss']
                 logs = checkpoint['logs']
             
-            model.to(device)
+            
             model = nn.DataParallel(model)
+            model.to(device)
 
         for i, data in enumerate(train_loader, 0):
             img, label = data
@@ -75,7 +76,7 @@ def train(model, num_epochs,train_loader, test_loader):
             print('---------------------------------------------------------------')
             torch.save({
                 'epoch':epoch,
-                'model_state_dict':model.state_dict(),
+                'model_state_dict':model.module.state_dict(),
                 'optimizer_state_dict':optimizer.state_dict(),
                 'loss':t_loss,
                 'logs':logs
