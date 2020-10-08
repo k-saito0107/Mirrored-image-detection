@@ -17,8 +17,8 @@ from data_augumentation import Compose,  Scale, Resize
 mean = (0.5, 0.5, 0.5)
 std = (0.5, 0.5, 0.5)
 scale = [0.7, 1.3]
-width = 1920
-height = 960
+width = 960
+height = 512
 batch_size = 24
 
 train_transform = transforms.Compose([
