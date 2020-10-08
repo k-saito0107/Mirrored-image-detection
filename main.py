@@ -19,7 +19,7 @@ std = (0.5, 0.5, 0.5)
 scale = [0.7, 1.3]
 width = 1920
 height = 960
-batch_size = 12
+batch_size = 24
 
 train_transform = transforms.Compose([
     Resize(width, height),

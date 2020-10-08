@@ -28,9 +28,10 @@ def train(model, num_epochs,train_loader, test_loader):
                 loss = checkpoint['loss']
                 logs = checkpoint['logs']
             
-            
-            model = nn.DataParallel(model)
             model.to(device)
+            model = nn.DataParallel(model)
+            cudnn.benchmark = True
+            
 
         for i, data in enumerate(train_loader, 0):
             img, label = data
