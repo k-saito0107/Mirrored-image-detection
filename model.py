@@ -57,15 +57,10 @@ class ResNet(nn.Module):
         )
 
         self.layer6 = nn.Sequential(
-            double_conv(f_out*16, f_out*32, kernel_size=3, stride=1, padding=1),
-            nn.MaxPool2d(kernel_size=2, stride=2)
-        )
-
-        self.layer7 = nn.Sequential(
             nn.AdaptiveAvgPool2d((1,1))
         )
 
-        self.layer8 = nn.Sequential(
+        self.layer7 = nn.Sequential(
             nn.Linear(f_out*32, f_out*8),
             nn.ReLU(inplace=True),
             nn.Linear(f_out*8, n_ch),
@@ -79,9 +74,8 @@ class ResNet(nn.Module):
         x = self.layer4(x)
         x = self.layer5(x)
         x = self.layer6(x)
-        x = self.layer7(x)
         x=x.view(-1, 1024)
-        x = self.layer8(x)
+        x = self.layer7(x)
 
         return x
 
