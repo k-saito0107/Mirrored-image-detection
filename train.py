@@ -37,7 +37,7 @@ def train(model, num_epochs,train_loader, test_loader):
             model.train()
             img = img.to(device)
             mini_batch_size = img.size()[0]
-            label = torch.full((mini_batch_size,),1).to(device)
+            label = torch.full((mini_batch_size,),1.0).to(device)
             optimizer.zero_grad()
             outputs = model(img)
             t_loss = criterion(outputs, label)
@@ -55,7 +55,7 @@ def train(model, num_epochs,train_loader, test_loader):
                 img = data
                 img = img.to(device)
                 mini_batch_size = img.size()[0]
-                label = torch.full((mini_batch_size,),1).to(device)
+                label = torch.full((mini_batch_size,),1.0).to(device)
                 v_outputs = model(img)
                 v_loss=criterion(v_outputs,label)
                 running_loss += v_loss.item()
