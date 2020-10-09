@@ -43,7 +43,7 @@ def train(model, num_epochs,train_loader, test_loader):
             t_loss = criterion(outputs, label)
             t_loss.backward()
             optimizer.step()
-        
+        '''
         #validation
         if epoch%10 == 0:
             if epoch == 0:
@@ -64,13 +64,13 @@ def train(model, num_epochs,train_loader, test_loader):
             val_loss = running_loss/len(test_loader)
             train_loss = t_loss.to('cpu')
             print('train_loss : {},  val_loss : {}'.format(train_loss, val_loss))
-
+            
             #ログを保存
             log_epoch = {'epoch' : epoch, 'train_loss' : train_loss, 'val_loss' : val_loss}
             logs.append(log_epoch)
             df = pd.DataFrame(logs)
             df.to_csv('/kw_resources/Mirrored-image-detection/log_out.csv')
-        
+        '''
         if epoch % 10 == 0 and epoch != 0:
             print('---------------------------------------------------------------')
             torch.save({
@@ -80,6 +80,13 @@ def train(model, num_epochs,train_loader, test_loader):
                 'loss':t_loss,
                 'logs':logs
             },'/kw_resources/Mirrored-image-detection/weights/model.pth')
+
+            #ログを保存
+            train_loss = t_loss.to('cpu')
+            log_epoch = {'epoch' : epoch, 'train_loss' : train_loss}
+            logs.append(log_epoch)
+            df = pd.DataFrame(logs)
+            df.to_csv('/kw_resources/Mirrored-image-detection/log_out.csv')
             
         
     
