@@ -14,7 +14,7 @@ print(path)
 #画像pathの取得
 data_path = '/kw_resources/Mirrored-image-detection'
 train_path = osp.abspath(data_path+'/normal_img_data/')
-test_path = osp.abspath(data+'/abnormal_img_data/')
+test_path = osp.abspath(data_path+'/abnormal_img_data/')
 
 train_path_img = glob(osp.join(train_path,'*.png'))
 test_path_img = glob(osp.join(test_path,'*.png'))
