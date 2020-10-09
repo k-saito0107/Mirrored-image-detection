@@ -14,7 +14,7 @@ def train(model, num_epochs,train_loader, test_loader):
     else:
         device = 'cpu'
     print(device)
-    criterion = nn.CrossEntropyLoss()
+    criterion = nn.MSELoss()
     optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
     logs = []
 
