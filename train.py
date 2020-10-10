@@ -22,6 +22,7 @@ def train(model, num_epochs,train_loader, test_loader):
         if epoch == 1:
             if os.path.exists('/kw_resources/Mirrored-image-detection/weights/model.pth'):
                 checkpoint = torch.load('/kw_resources/Mirrored-image-detection/weights/model.pth')
+                checkpoint = checkpoint.to(device)
                 model.load_state_dict(checkpoint['model_state_dict'])
                 optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
                 epoch = checkpoint['epoch']
