@@ -39,7 +39,7 @@ def train(model, num_epochs,train_loader, test_loader):
             mini_batch_size = img.size()[0]
             label = torch.full((mini_batch_size,),1.0).to(device)
             outputs = model(img)
-            outputs = outputs.view(1,-1)
+            outputs = outputs.view(-1)
             optimizer.zero_grad()
             t_loss = criterion(outputs, label)
             t_loss.backward()
@@ -83,9 +83,8 @@ def train(model, num_epochs,train_loader, test_loader):
             },'/kw_resources/Mirrored-image-detection/weights/model.pth')
 
             #ログを保存
-            train_loss = t_loss.to('cpu')
-            print('epoch : {}, train_loss : {}'.format(epoch, train_loss))
-            log_epoch = {'epoch' : epoch, 'train_loss' : train_loss}
+            print('epoch : {}, train_loss : {}'.format(epoch, t_loss))
+            log_epoch = {'epoch' : epoch, 'train_loss' : t_loss}
             logs.append(log_epoch)
             df = pd.DataFrame(logs)
             df.to_csv('/kw_resources/Mirrored-image-detection/log_out.csv')
