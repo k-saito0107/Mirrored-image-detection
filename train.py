@@ -40,7 +40,6 @@ def train(model, num_epochs,train_loader, test_loader):
             label = torch.full((mini_batch_size,),1.0).to(device)
             outputs = model(img)
             outputs = outputs.view(-1)
-            print(outputs)
             t_loss = criterion(outputs, label)
             optimizer.zero_grad()
             t_loss.backward()
