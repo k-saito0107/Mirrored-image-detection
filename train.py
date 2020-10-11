@@ -31,7 +31,7 @@ def train(model, num_epochs,train_loader, test_loader):
             
             model.to(device)
             model = nn.DataParallel(model)
-            
+        running_loss = 0
 
         for data in train_loader:
             img = data
@@ -46,6 +46,9 @@ def train(model, num_epochs,train_loader, test_loader):
             optimizer.zero_grad()
             t_loss.backward()
             optimizer.step()
+            running_loss += t_loss.item()
+        
+        train_loss = running_loss/len(train_loader)
         '''
         #validation
         if epoch%10 == 0:
@@ -80,13 +83,13 @@ def train(model, num_epochs,train_loader, test_loader):
                 'epoch':epoch,
                 'model_state_dict':model.module.state_dict(),
                 'optimizer_state_dict':optimizer.state_dict(),
-                'loss':t_loss,
+                'loss':train_loss,
                 'logs':logs
             },'/kw_resources/Mirrored-image-detection/weights/model.pth')
 
             #ログを保存
-            print('epoch : {}, train_loss : {}'.format(epoch, t_loss))
-            log_epoch = {'epoch' : epoch, 'train_loss' : t_loss}
+            print('epoch : {}, train_loss : {}'.format(epoch, train_loss))
+            log_epoch = {'epoch' : epoch, 'train_loss' : train_loss}
             logs.append(log_epoch)
             df = pd.DataFrame(logs)
             df.to_csv('/kw_resources/Mirrored-image-detection/log_out.csv')

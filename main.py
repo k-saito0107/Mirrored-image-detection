@@ -63,7 +63,7 @@ model = ResNet(in_ch, f_out, n_ch)
 
 #モデルの学習
 from train import train
-num_epoch = 100
+num_epoch = 200
 
 up_model = train(model, num_epoch, train_loader, test_loader)
 
